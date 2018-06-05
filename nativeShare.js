@@ -207,3 +207,5 @@ var nativeShare = function (elementNode, config) {
 
     return this;
 };
+
+module.exports = nativeShare;
