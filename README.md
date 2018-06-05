@@ -2,6 +2,8 @@
 一个在手机端调用分享原生功能的组件，适配包括QQ，微信，UC，Safrai所有手机浏览器。
 此插件基于[nativeShare](https://github.com/JefferyWang/nativeShare.js)进行了二次扩展，添了除调起UC，QQ浏览器内置分享组件之外的其他浏览器适配。
 
+## 添加到 npm
+
 ## 依赖
 * 本插件不依赖任何其他的js库和组件。
 

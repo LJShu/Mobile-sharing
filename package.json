@@ -1,0 +1,25 @@
+{
+  "name": "native-sharing",
+  "version": "1.0.0",
+  "description": "基于nativeShare进行了二次扩展, 添了除调起UC，QQ浏览器内置分享组件之外的其他浏览器适配。添加到npm。",
+  "main": "nativeShare.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weineel/Mobile-sharing.git"
+  },
+  "keywords": [
+    "nativeShare",
+    "native",
+    "share",
+    "Mobile-sharing"
+  ],
+  "author": "weineel",
+  "license": "Apache License 2.0",
+  "bugs": {
+    "url": "https://github.com/weineel/Mobile-sharing/issues"
+  },
+  "homepage": "https://github.com/weineel/Mobile-sharing#readme"
+}
