@@ -8,6 +8,7 @@
     border-top: 1px solid gray;
     border-bottom: 1px solid gray;
     z-index: 999;
+    background: #fff;
 }
 
 #nativeShare .label {
@@ -132,7 +133,4 @@
 #nativeShareBox a .url{
     color: #333;
     text-decoration: none;
-}
-#nativeShareBox {
-    display: none;
 }

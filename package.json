@@ -1,6 +1,6 @@
 {
   "name": "native-sharing",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "基于nativeShare进行了二次扩展, 添了除调起UC，QQ浏览器内置分享组件之外的其他浏览器适配。添加到npm。",
   "main": "nativeShare.js",
   "scripts": {
