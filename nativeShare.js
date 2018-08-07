@@ -1,5 +1,8 @@
-var nativeShare = function (elementNode, config) {
+// elementNode 为 分享组件内容插入的位置。为了方便在SPA中，分享组件的生命周期跟随页面组件生命周期
+
+function NativeShare(elementNode, config) {
     if (!document.getElementById(elementNode)) {
+        console.error(new Error('没有找到id为：' + elementNode + ' 的元素'))
         return false;
     }
 
@@ -20,6 +23,7 @@ var nativeShare = function (elementNode, config) {
     };
     var isWeixin = false;
     var isInnerQQ = false;
+    var wrapperId = 'nativeShareBox'
 
     config = config || {};
     this.elementNode = elementNode;
@@ -85,7 +89,7 @@ var nativeShare = function (elementNode, config) {
 
     this.html = function(type) {
         /* type: 1:调用原生分享功能, type: 2:调用qrcode填充, type: 3:对微信浏览器填充背景*/
-        var position = document.getElementsByTagName('body')[0];
+        var position = document.getElementById(elementNode) || document.getElementsByTagName('body')[0];
         if (type === 1) {
             var html = '<div id="nativeShare"><div class="label"><span class="title">分享至：</span><span class="close"></span></div>'+
                 '<div class="list clearfix">'+
@@ -97,35 +101,49 @@ var nativeShare = function (elementNode, config) {
                 '<span data-app="" class="nativeShare more"><i></i>更多</span>'+
                 '</div></div>';
         } else if (type === 2) {
-            var html = '<div id="nativeShare"><div class="label"><span class="title">分享至：</span><span class="close"></span></div>'+
+            var html = '<div class="closewx"><div id="nativeShare"><div class="label"><span class="title">分享至：</span><span class="close"></span></div>'+
                 '<div class="list clearfix">'+
                 '<div class="intro">长按复制下方链接，去粘贴给好友吧：</div>' +
-                '<a href="'+ document.location.href +'" target="_blank">' +
+                '<a href="'+ this.url +'" target="_blank">' +
                 '<div class="url"><span>' +
-                document.location.href +
+                this.url +
                 '</span></div>'+
                 '</a>' +
-                '</div></div>';
+                '</div></div></div>';
         } else {
             var html = '<div class="closewx">'+
                 '<div class="wxshare"></div>'+
                 '</div>';
         }
+        var $oldWrapper = document.getElementById(wrapperId)
+        if ($oldWrapper) {
+            $oldWrapper.remove()
+        }
         var wrapper = document.createElement('div');
-        wrapper.id = 'nativeShareBox';
+        wrapper.id = wrapperId;
         wrapper.innerHTML = html;
         position.appendChild(wrapper);
         this.bindEvents();
     };
 
     this.bindEvents = function() {
-        var close = document.querySelector('#nativeShare .close, #nativeShareBox .closewx');
-        close.addEventListener('click', function () {
-            document.getElementById('nativeShareBox').style.display = 'none';
-        });
-        document.getElementById(elementNode).addEventListener('click', function () {
-            document.getElementById('nativeShareBox').style.display = 'block';
-        });
+        var close = document.querySelectorAll('#nativeShare .close, #' + wrapperId + ' .closewx');
+        var _this = this
+        close.forEach(function(ele) {
+            ele.addEventListener('click', function(e) {
+                if (e.target !== e.currentTarget) return
+                _this.hide()
+                e.stopPropagation()
+            });
+        })
+    }
+
+    this.show = function() {
+        document.getElementById(wrapperId).style.display = 'block';
+    }
+
+    this.hide = function() {
+        document.getElementById(wrapperId).style.display = 'none';
     }
 
     this.isloadqqApi = function () {
@@ -208,4 +226,4 @@ var nativeShare = function (elementNode, config) {
     return this;
 };
 
-module.exports = nativeShare;
+module.exports = NativeShare;
